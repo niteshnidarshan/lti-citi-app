@@ -1,0 +1,25 @@
+
+<div class="topnav" id="myTopnav"> 
+  <button mat-button routerLink="logout" routerLinkActive="active"> 
+    <span>Log out</span>
+  </button>
+  <span>
+    <button mat-button routerLink="login" routerLinkActive="active"> 
+      <span>Login</span>
+    </button>
+  </span>
+  <button mat-button routerLink="register" routerLinkActive="active"> 
+    <span>Open Account</span>
+  </button>
+  <button mat-button routerLink="transfer" routerLinkActive="active"> 
+    <span>Transfer</span>
+  </button>
+  <button mat-button routerLink="transaction" routerLinkActive="active"> 
+    <span>My Transactions</span>
+  </button>
+</div>
+
+<div class="content-area"> 
+  <h1 style="display: none;">Jai Ram G ki</h1>
+  <router-outlet></router-outlet>
+</div>

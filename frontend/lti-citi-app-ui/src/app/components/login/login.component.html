@@ -1,0 +1,45 @@
+<div class="container"> 
+        
+    <div class="row col-md-12"> 
+        
+        <mat-card class="card">
+            <mat-card class="header"> 
+                <mat-card-title>Login</mat-card-title>  
+           </mat-card> 
+           <div class="col-md-12">&nbsp;</div> 
+            <!--Post Article stats-->
+            <mat-card-content>
+             
+            <form [formGroup]="loginFormGroup" (ngSubmit)="doLogin()" style="padding:5px;">
+                    <p>
+                        <mat-form-field class="login-width" appearance="outline">
+                            <mat-label>Mobile</mat-label> 
+                            <input matInput type="number" [formControl] = "mobile"/>
+                            <mat-error *ngIf="loginFormGroup.controls['mobile'].hasError('required')">Mobile number required!</mat-error>  
+                        </mat-form-field> 
+                    </p>
+                    <p>
+                        <mat-form-field class="login-width" appearance="outline">
+                            <mat-label>Social Security#</mat-label>
+                            <input matInput placeholder="Social Security Number" [type]="hide ? 'password' : 'text'" [formControl]="password"/>
+                            <mat-icon color="accent" matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                            <mat-error *ngIf="loginFormGroup.controls['password'].hasError('required')">Social Security number required!</mat-error>
+                        </mat-form-field>
+                    </p>
+                    <div class="col-md-12"  style="align-content: left;">
+                        <span matTooltip="Provide Mobile & Social Security Number combination to login">
+                        <button type="submit" mat-raised-button [disabled]="!loginFormGroup.valid"> 
+                          <span>Login</span>
+                          
+                        </button>
+                        </span> 
+                      </div> 
+            </form>
+            </mat-card-content>
+            <mat-card-actions> 
+                
+            </mat-card-actions>  
+        </mat-card>
+    </div> 
+ 
+</div> 
