@@ -9,17 +9,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import app.lti.citi.transaction.lticitiapptransaction.dto.AccountDetailDto;
 
-@FeignClient(name = "lti-citi-app-account") 
-//@FeignClient(name = "api-gateway")
+//@FeignClient(name = "lti-citi-app-account") 
+@FeignClient(name = "lti-citi-app-api-gateway")
 @RibbonClient(name = "lti-citi-app-account")
 public interface AccountFeignProxy {
 	
-	//@PostMapping("/lti-citi-app-account/api/account/update-amount/{accountId}/{amount}")
-	@PostMapping("/api/account/update-amount/{accountId}/{amount}")
+	@PostMapping("/lti-citi-app-account/api/account/update-amount/{accountId}/{amount}")
+	//@PostMapping("/api/account/update-amount/{accountId}/{amount}")
 	public ResponseEntity<AccountDetailDto> updateAccountAmount(@PathVariable("accountId") String accountId, @PathVariable("amount") Double amount);
 
-	//@GetMapping("/lti-citi-app-account/api/account/get-amount/{accountId}")
-	@GetMapping("/api/account/get-amount/{accountId}")
+	@GetMapping("/lti-citi-app-account/api/account/get-amount/{accountId}")
+	//@GetMapping("/api/account/get-amount/{accountId}")
 	public ResponseEntity<Double> getAmount(@PathVariable("accountId") String accountId);
 	
 }
