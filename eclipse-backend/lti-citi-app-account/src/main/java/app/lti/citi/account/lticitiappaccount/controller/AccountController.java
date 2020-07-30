@@ -1,5 +1,7 @@
 package app.lti.citi.account.lticitiappaccount.controller;
  
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -81,6 +83,56 @@ public class AccountController {
 			throw new CommonException("Account deactivation failed.");
 		
 		ResponseEntity<String> response = new ResponseEntity<String>(responseMessage, HttpStatus.OK);
+		
+		return response; 
+	}
+	
+	@GetMapping("/get-account/{accountId}")
+	public ResponseEntity<AccountDetailDto> modifyAccount(@PathVariable("accountId") String accountId){
+		
+		AccountDetailDto account = null;
+		
+		if(accountId == null)
+			throw new CommonException("Invalid account request.");
+		
+		account = this.service.getAccountDetail(accountId);
+		
+		if(account == null)
+			throw new CommonException("No such account available!");
+		
+		ResponseEntity<AccountDetailDto> response = new ResponseEntity<AccountDetailDto>(account, HttpStatus.OK);
+		
+		return response; 
+	}
+	
+	@GetMapping("/get-all")
+	public ResponseEntity<List<AccountDetailDto>> getAllAccount(){
+		
+		List<AccountDetailDto> accounts = null;
+		 
+		accounts = this.service.getAllAccountDetail();
+		
+		if(accounts == null)
+			throw new CommonException("No accounts available!");
+		
+		ResponseEntity<List<AccountDetailDto>> response = new ResponseEntity<List<AccountDetailDto>>(accounts, HttpStatus.OK);
+		
+		return response; 
+	}
+	
+	@GetMapping("/getAll/{customerId}")
+	public ResponseEntity<List<AccountDetailDto>> getAllAccountByCustomerId(@PathVariable("customerId") String customerId){
+		List<AccountDetailDto> accounts = null;
+		
+		if(customerId == null)
+			throw new CommonException("Invalid Request!");
+		 
+		accounts = this.service.getAccountByCustomerId(customerId);
+		
+		if(accounts == null)
+			throw new CommonException("No accounts available!");
+		
+		ResponseEntity<List<AccountDetailDto>> response = new ResponseEntity<List<AccountDetailDto>>(accounts, HttpStatus.OK);
 		
 		return response; 
 	}

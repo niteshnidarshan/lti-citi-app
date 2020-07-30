@@ -9,5 +9,5 @@ public interface TransactionService {
 
 	public TransactionDetailDto transferAmount(TransactionDetailDto transferDetailDto) throws Exception;
 	public List<TransactionDetailDto> getAllTransaction(String associatedUserId) throws Exception;
-	
+	public Double getAmount(String sendersAccountId);
 }

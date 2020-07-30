@@ -1,8 +1,11 @@
 package app.lti.citi.account.lticitiappaccount.service;
 
+import org.springframework.stereotype.Component;
+
 import app.lti.citi.account.lticitiappaccount.document.AccountDetail;
 import app.lti.citi.account.lticitiappaccount.dto.AccountDetailDto;
 
+@Component
 public class ObjectConvertor {
 
 	public AccountDetailDto actualToDto(AccountDetail ac) {

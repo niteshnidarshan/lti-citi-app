@@ -1,5 +1,6 @@
 package app.lti.citi.user.lticitiappuser.service;
 
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -19,6 +20,7 @@ public class UserServiceImpl implements UserService{
 	@Autowired
 	private UserRepository repository;
 	
+	@Autowired
 	private ObjectConvertor convertor;
 
 	@Override
@@ -49,7 +51,11 @@ public class UserServiceImpl implements UserService{
 				userDetailDto.setUserId(null);
 				userDetailDto.setUserType(UserType.GENERAL);
 				userDetailDto.setUserStatus(Status.ACTIVE);
-				UserDetail user = this.repository.save(this.convertor.dtoToActual(userDetailDto));
+				userDetailDto.setProfileCreationTimeStamp(new Date(System.currentTimeMillis())); 
+				
+				UserDetail user = this.convertor.dtoToActual(userDetailDto);
+				
+				user = this.repository.save(user); 
 				if(user != null) {
 					dto = this.convertor.actualToDto(user);
 					dto.setSocialSecurityNumber(null);
@@ -66,18 +72,23 @@ public class UserServiceImpl implements UserService{
 	public UserDetailDto editProfile(UserDetailDto userDetailDto) throws Exception {
 		UserDetailDto dto = null;
 		
-		if(userDetailDto != null && userDetailDto.getUserId() != null) {
-			UserDetail user = this.repository.findById(userDetailDto.getUserId()).orElse(null);
-			if(user != null) {
-				user.setFirstName(userDetailDto.getFirstName());
-				user.setLastName(userDetailDto.getLastName());
-				user.setEmail(userDetailDto.getEmail());
-				user.setMobile(userDetailDto.getMobile());
-				user = this.repository.save(user);
+		try {
+			if(userDetailDto != null && userDetailDto.getUserId() != null) {
+				UserDetail user = this.repository.findById(userDetailDto.getUserId()).orElse(null);
 				if(user != null) {
-					dto = this.convertor.actualToDto(user);
+					user.setFirstName(userDetailDto.getFirstName());
+					user.setLastName(userDetailDto.getLastName());
+					user.setEmail(userDetailDto.getEmail());
+					user.setMobile(userDetailDto.getMobile());
+					user.setProfileLastModifiedTimeStamp(new Date(System.currentTimeMillis()));
+					user = this.repository.save(user);
+					if(user != null) {
+						dto = this.convertor.actualToDto(user);
+					}
 				}
 			}
+		}catch(Exception ex) {
+			throw ex;
 		}
 		
 		return dto;

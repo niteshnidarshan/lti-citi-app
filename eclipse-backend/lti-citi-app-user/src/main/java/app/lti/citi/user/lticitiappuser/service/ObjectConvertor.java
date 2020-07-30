@@ -1,8 +1,11 @@
 package app.lti.citi.user.lticitiappuser.service;
 
+import org.springframework.stereotype.Component;
+
 import app.lti.citi.user.lticitiappuser.document.UserDetail;
 import app.lti.citi.user.lticitiappuser.dto.UserDetailDto;
 
+@Component
 public class ObjectConvertor {
 
 	public UserDetailDto actualToDto(UserDetail user) {

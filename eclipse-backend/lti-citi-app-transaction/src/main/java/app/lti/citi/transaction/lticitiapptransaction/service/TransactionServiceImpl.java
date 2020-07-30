@@ -62,8 +62,10 @@ public class TransactionServiceImpl implements TransactionService{
 		
 		if(transactionDetailDto != null) {
 			
-			Lock lock = new ReentrantLock(true);
 			ExecutorService executor = Executors.newFixedThreadPool(1); 
+
+			Lock lock = new ReentrantLock(true);
+			lock.lock(); 
 			
 			double amountToBeTransfered = transactionDetailDto.getAmount();
 			
@@ -78,8 +80,7 @@ public class TransactionServiceImpl implements TransactionService{
 				Future<Double> receiverAmount = executor.submit(new ReceiverAmount(transactionDetailDto.getReceiversAccountId(), accountProxy));
 				 
 				Double senders_total_amount = senderAmount.get();
-				Double receivers_total_amount = receiverAmount.get();
-				
+				Double receivers_total_amount = receiverAmount.get(); 
 
 				//Retain values for rollback in case transaction failure
 				senders_total_amount_rollback = senders_total_amount;
@@ -191,6 +192,11 @@ public class TransactionServiceImpl implements TransactionService{
 		
 		return dtoList;
 
+	}
+	
+	@Override
+	public Double getAmount(String sendersAccountId) {
+		return this.accountProxy.getAmount(sendersAccountId).getBody();
 	}
 	
 	

@@ -40,6 +40,15 @@ public class TransactionController {
 		
 		try {
 			
+			//validate sender's account balance
+			Double sendersBalance = this.service.getAmount(dto.getSenderAccountId());
+			
+			if(dto.getAmount() <= 0)
+				throw new CommonException("Not a valid amount to transfer");
+			
+			if(dto.getAmount() > sendersBalance)
+				throw new CommonException("Not enough money in your account!");
+			
 			transaction = this.service.transferAmount(dto);
 			
 		} catch (Exception e) {

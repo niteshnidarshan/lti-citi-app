@@ -1,6 +1,8 @@
 package app.lti.citi.account.lticitiappaccount.service;
  
 import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -18,6 +20,7 @@ public class AccountServiceImpl implements AccountService{
 	@Autowired
 	private AccountRepository repository;
 	
+	@Autowired
 	private ObjectConvertor convertor;
 
 	@Override
@@ -26,6 +29,7 @@ public class AccountServiceImpl implements AccountService{
 		if(accountDetailDto != null) {
 			AccountDetail account = this.convertor.DtoToActual(accountDetailDto);
 			account.setAccountCreationTimeStamp(new Date(System.currentTimeMillis()));
+			account.setAccountStatus(AccountStatus.ACTIVE);
 			account = this.repository.save(account);
 			if(account != null) {
 				dto = this.convertor.actualToDto(account);
@@ -52,6 +56,55 @@ public class AccountServiceImpl implements AccountService{
 			}
 		}
 		return dto;
+	}
+	
+	
+	@Override
+	public AccountDetailDto getAccountDetail(String accountId) {
+		
+		AccountDetailDto dto = null;
+		if(accountId != null) {
+			AccountDetail account = this.repository.findById(accountId).orElse(null);
+			if(account != null) { 
+				 
+				dto = this.convertor.actualToDto(account);
+				
+			}
+		}
+		return dto;
+		
+	}
+	
+	@Override
+	public List<AccountDetailDto> getAllAccountDetail() {
+		List<AccountDetailDto> dtoList = new LinkedList<AccountDetailDto>();
+		
+		this.repository.findAll().forEach(
+				(account)->{
+					if(account != null) {
+						AccountDetailDto dto = this.convertor.actualToDto(account);
+						dtoList.add(dto);
+					}
+				}
+			);
+		
+		return dtoList;
+	}
+
+	@Override
+	public List<AccountDetailDto> getAccountByCustomerId(String associatedUserId) {
+		List<AccountDetailDto> dtoList = new LinkedList<AccountDetailDto>();
+		
+		this.repository.findAllByAssociatedUserId(associatedUserId).forEach(
+				(account)->{
+					if(account != null) {
+						AccountDetailDto dto = this.convertor.actualToDto(account);
+						dtoList.add(dto);
+					}
+				}
+			);
+		
+		return dtoList;
 	}
 
 	@Override
@@ -81,6 +134,7 @@ public class AccountServiceImpl implements AccountService{
 		try {
 			if(accountId != null) {
 				lock = new ReentrantLock(true);
+				lock.lock();
 				AccountDetail account = this.repository.findById(accountId).orElse(null);
 				if(account != null) {
 					account.setAmount(amount);
@@ -108,22 +162,26 @@ public class AccountServiceImpl implements AccountService{
 		Double amount = 0.0d;
 		Lock lock = null;
 		try {
+			lock = new ReentrantLock(true);
+			lock.lock(); 
 			if(accountId != null) {
-				lock = new ReentrantLock(true);
-				AccountDetail account = this.repository.findById(accountId).orElse(null);
+				
+				AccountDetail account = this.repository.findById(accountId).orElse(null); 
 				if(account != null) { 
 					amount = account.getAmount();
 				}
 			}
-		}catch(Exception ex) {
+		}catch(Exception ex) { 
 			throw ex;
 		}
-		finally {
-			if(lock != null) {
+		finally { 
+			if(lock != null) {  
 				lock.unlock();
-			}
-		}
+			} 
+		} 
 		return amount;
 	}
+
+	
 
 }

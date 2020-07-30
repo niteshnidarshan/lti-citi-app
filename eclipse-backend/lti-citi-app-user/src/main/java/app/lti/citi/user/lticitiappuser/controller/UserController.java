@@ -57,13 +57,16 @@ public class UserController {
 	
 	@PostMapping("/register")
 	public ResponseEntity<UserDetailDto> register(@RequestBody UserDetailDto userDetailDto){
-		UserDetailDto dto = null;
-		
+		UserDetailDto dto = null; 
 		if(userDetailDto == null)
 			throw new CommonException("Invalid input!");
 		
-		try {
-			dto = this.service.register(userDetailDto);
+		if(this.service.isMobileRegisterd(userDetailDto.getMobile())) {
+			throw new CommonException("Mobile already registerd!");
+		}
+		
+		try { 
+			dto = this.service.register(userDetailDto); 
 		} catch (Exception e) {
 			throw new CommonException(e.getMessage());
 		}
@@ -112,7 +115,7 @@ public class UserController {
 		dto = this.service.getUserByUserId(userId);
 		
 		if(dto == null) {
-			throw new CommonException("Something wrong with system!");
+			throw new CommonException("No such user registered!");
 		}
 		
 		ResponseEntity<UserDetailDto> response = new ResponseEntity<UserDetailDto>(dto, HttpStatus.OK);
@@ -132,7 +135,7 @@ public class UserController {
 		dto = this.service.getUserByMobile(mobile);
 		
 		if(dto == null) {
-			throw new CommonException("Something wrong with system!");
+			throw new CommonException("No such mobile registered!");
 		}
 		
 		ResponseEntity<UserDetailDto> response = new ResponseEntity<UserDetailDto>(dto, HttpStatus.OK);
