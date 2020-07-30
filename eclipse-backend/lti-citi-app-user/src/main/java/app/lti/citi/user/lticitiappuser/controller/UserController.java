@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import app.lti.citi.user.lticitiappuser.dto.LoginDto;
 import app.lti.citi.user.lticitiappuser.dto.UserDetailDto;
@@ -22,6 +23,7 @@ import app.lti.citi.user.lticitiappuser.dto.UserExceptionDto;
 import app.lti.citi.user.lticitiappuser.exception.CommonException;
 import app.lti.citi.user.lticitiappuser.service.UserService;
 
+@RestController
 @RequestMapping("/api/user")
 public class UserController {
 

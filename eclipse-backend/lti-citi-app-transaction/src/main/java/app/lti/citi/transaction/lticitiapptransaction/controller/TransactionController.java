@@ -13,12 +13,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import app.lti.citi.transaction.lticitiapptransaction.dto.TransactionDetailDto;
 import app.lti.citi.transaction.lticitiapptransaction.dto.TransactionExceptionDto;
 import app.lti.citi.transaction.lticitiapptransaction.exception.CommonException;
 import app.lti.citi.transaction.lticitiapptransaction.service.TransactionService;
 
+@RestController
 @RequestMapping("/api/transaction")
 public class TransactionController {
 	
