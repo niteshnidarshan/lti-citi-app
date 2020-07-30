@@ -4,14 +4,14 @@ import java.util.concurrent.Callable;
 
 import app.lti.citi.transaction.lticitiapptransaction.feignproxy.AccountFeignProxy;
 
-public class SenderAmount implements Callable<Double>{
+public class ReceiverAmount implements Callable<Double>{
 	/**
-	 * To fetch receiver's total amount
+	 * To fetch Receiver's total amount
 	 */
 	private String accountId;
 	private AccountFeignProxy proxy;
 	
-	public SenderAmount(String accountId, AccountFeignProxy proxy) {
+	public ReceiverAmount(String accountId, AccountFeignProxy proxy) {
 		this.accountId = accountId;
 		this.proxy = proxy;
 	}

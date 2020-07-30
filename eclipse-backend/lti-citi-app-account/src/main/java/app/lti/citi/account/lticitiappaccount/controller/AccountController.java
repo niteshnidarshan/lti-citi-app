@@ -123,9 +123,7 @@ public class AccountController {
 		ResponseEntity<AccountDetailDto> response = new ResponseEntity<AccountDetailDto>(account, HttpStatus.OK);
 		
 		return response; 
-	}
-	
-	
+	} 
 	
 	@ExceptionHandler(CommonException.class)// It is used to handle exception in rest controller - if not defined, then in return response a trace element will also be attached with exception
 	public ResponseEntity<AccountExceptionDto> commonExceptionHandler(CommonException ex){

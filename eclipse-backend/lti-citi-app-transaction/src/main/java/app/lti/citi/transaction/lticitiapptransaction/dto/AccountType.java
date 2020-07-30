@@ -1,8 +1,7 @@
 package app.lti.citi.transaction.lticitiapptransaction.dto;
 
-public enum TransactionStatus {
-
-	SUCCESS,
-	FAILED
-	
+public enum AccountType {
+	CHECKING,
+	SAVINGS,
+	MONEYMARKET
 }

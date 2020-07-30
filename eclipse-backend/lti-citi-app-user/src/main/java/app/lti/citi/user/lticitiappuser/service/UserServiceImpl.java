@@ -22,14 +22,18 @@ public class UserServiceImpl implements UserService{
 	private ObjectConvertor convertor;
 
 	@Override
-	public UserDetailDto login(LoginDto loginDto) {
+	public UserDetailDto login(LoginDto loginDto) throws Exception {
 		UserDetailDto dto = null;
 		
 		if(loginDto != null && loginDto.getMobile() != null) {
-			UserDetail user = this.repository.findByMobileAndUserStatus(loginDto.getMobile(), Status.ACTIVE.toString());
-			if(user != null) {
-				dto = this.convertor.actualToDto(user);
-				dto.setSocialSecurityNumber(null);
+			try {
+				UserDetail user = this.repository.findByMobileAndSocialSecurityNumberAndUserStatus(loginDto.getMobile(), loginDto.getSocialSecurityNumber(), Status.ACTIVE);
+				if(user != null) {
+					dto = this.convertor.actualToDto(user);
+					dto.setSocialSecurityNumber(null);
+				}
+			}catch(Exception ex) {
+				throw ex;
 			}
 		}
 		
@@ -37,17 +41,21 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public UserDetailDto register(UserDetailDto userDetailDto) {
+	public UserDetailDto register(UserDetailDto userDetailDto) throws Exception {
 		UserDetailDto dto = null;
 		
 		if(userDetailDto != null) {
-			userDetailDto.setUserId(null);
-			userDetailDto.setUserType(UserType.GENERAL);
-			userDetailDto.setUserStatus(Status.ACTIVE);
-			UserDetail user = this.repository.save(this.convertor.dtoToActual(userDetailDto));
-			if(user != null) {
-				dto = this.convertor.actualToDto(user);
-				dto.setSocialSecurityNumber(null);
+			try { 
+				userDetailDto.setUserId(null);
+				userDetailDto.setUserType(UserType.GENERAL);
+				userDetailDto.setUserStatus(Status.ACTIVE);
+				UserDetail user = this.repository.save(this.convertor.dtoToActual(userDetailDto));
+				if(user != null) {
+					dto = this.convertor.actualToDto(user);
+					dto.setSocialSecurityNumber(null);
+				}
+			}catch(Exception ex) {
+				throw ex;
 			}
 		}
 		
@@ -55,7 +63,7 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public UserDetailDto editProfile(UserDetailDto userDetailDto) {
+	public UserDetailDto editProfile(UserDetailDto userDetailDto) throws Exception {
 		UserDetailDto dto = null;
 		
 		if(userDetailDto != null && userDetailDto.getUserId() != null) {
@@ -94,7 +102,7 @@ public class UserServiceImpl implements UserService{
 		UserDetailDto dto = null;
 		
 		if(mobile != null) {
-			UserDetail user = this.repository.findByMobileAndUserStatus(mobile, Status.ACTIVE.toString());
+			UserDetail user = this.repository.findByMobileAndUserStatus(mobile, Status.ACTIVE);
 			if(user != null) {
 				dto = this.convertor.actualToDto(user);
 			}				
@@ -122,7 +130,7 @@ public class UserServiceImpl implements UserService{
 	}
 	
 	public boolean isMobileRegisterd(String mobile) {
-		UserDetail user = this.repository.findByMobileAndUserStatus(mobile, Status.ACTIVE.toString());
+		UserDetail user = this.repository.findByMobileAndUserStatus(mobile, Status.ACTIVE);
 		if(user == null)
 			return false;
 		else
@@ -136,7 +144,7 @@ public class UserServiceImpl implements UserService{
 		 */
 		boolean deleteStatus = false;
 		if(mobile != null) {
-			UserDetail user = this.repository.findByMobileAndUserStatus(mobile, Status.ACTIVE.toString());
+			UserDetail user = this.repository.findByMobileAndUserStatus(mobile, Status.ACTIVE);
 			if(user != null) {
 				user.setUserStatus(Status.INACTIVE);
 				user = this.repository.save(user);

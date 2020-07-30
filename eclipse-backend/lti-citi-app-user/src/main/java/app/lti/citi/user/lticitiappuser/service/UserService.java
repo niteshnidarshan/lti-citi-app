@@ -7,9 +7,9 @@ import app.lti.citi.user.lticitiappuser.dto.UserDetailDto;
 
 public interface UserService {
 	
-	public UserDetailDto login(LoginDto loginDto);
-	public UserDetailDto register(UserDetailDto userDetailDto);
-	public UserDetailDto editProfile(UserDetailDto userDetailDto);
+	public UserDetailDto login(LoginDto loginDto) throws Exception;
+	public UserDetailDto register(UserDetailDto userDetailDto)  throws Exception;
+	public UserDetailDto editProfile(UserDetailDto userDetailDto) throws Exception;
 	public UserDetailDto getUserByUserId(String userId);
 	public UserDetailDto getUserByMobile(String mobile);
 	public boolean deleteUser(String mobile);
