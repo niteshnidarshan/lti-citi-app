@@ -9,10 +9,12 @@ import org.springframework.stereotype.Service;
 
 import app.lti.citi.user.lticitiappuser.dao.UserRepository;
 import app.lti.citi.user.lticitiappuser.document.UserDetail;
+import app.lti.citi.user.lticitiappuser.dto.AccountDetailDto;
 import app.lti.citi.user.lticitiappuser.dto.LoginDto;
 import app.lti.citi.user.lticitiappuser.dto.Status;
 import app.lti.citi.user.lticitiappuser.dto.UserDetailDto;
 import app.lti.citi.user.lticitiappuser.dto.UserType;
+import app.lti.citi.user.lticitiappuser.feignproxy.AccountProxy;
 
 @Service
 public class UserServiceImpl implements UserService{
@@ -22,6 +24,9 @@ public class UserServiceImpl implements UserService{
 	
 	@Autowired
 	private ObjectConvertor convertor;
+	
+	@Autowired
+	private AccountProxy proxy; 
 
 	@Override
 	public UserDetailDto login(LoginDto loginDto) throws Exception {
@@ -102,6 +107,8 @@ public class UserServiceImpl implements UserService{
 			UserDetail user = this.repository.findById(userId).orElse(null);
 			if(user != null) {
 				dto = this.convertor.actualToDto(user);
+				List<AccountDetailDto> accounts = this.proxy.getAllAccountByCustomerId(dto.getUserId()).getBody();
+				dto.setAssociatedAccounts(accounts);
 			}				
 		}
 		

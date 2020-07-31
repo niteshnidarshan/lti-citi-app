@@ -34,6 +34,7 @@ import { TransferComponent } from './components/transfer/transfer.component';
 import { LogoutComponent } from './components/logout/logout.component';
 import { TransactionComponent } from './components/transaction/transaction.component';
 import { MessageDialogComponent } from './components/dialog/message-dialog/message-dialog.component';
+import { AddAccountComponent } from './components/add-account/add-account.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { MessageDialogComponent } from './components/dialog/message-dialog/messa
     TransferComponent,
     LogoutComponent,
     TransactionComponent,
-    MessageDialogComponent
+    MessageDialogComponent,
+    AddAccountComponent
   ],
   imports: [
     BrowserModule,

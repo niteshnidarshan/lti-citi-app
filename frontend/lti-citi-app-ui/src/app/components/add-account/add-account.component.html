@@ -1,0 +1,41 @@
+<div class="container">
+    <form [formGroup]="addForm" (ngSubmit)="doRegister()">
+      <div class="row large-box mat-elevation-z3" style="width: 100%;">
+        <mat-card class="header"> 
+          <mat-card-title>Open Account</mat-card-title>  
+        </mat-card>
+<div class="col-md-6">
+    <mat-form-field appearance="fill">
+        <mat-label>Account Type</mat-label>
+        <mat-select [formControl]="addForm.controls['accountType']" required> 
+            <mat-option value="SAVINGS" >SAVINGS</mat-option>
+            <mat-option value="CHECKING" >CHECKING</mat-option>
+            <mat-option value="MONEYMARKET" >MONEYMARKET</mat-option>
+        </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="col-md-6">
+    
+    <p>
+    <mat-form-field class="text-full-width" appearance="standard">
+      <mat-label>Initial Amount</mat-label>
+      <input matInput placeholder="Initial Amount" name = "initialValue" [formControl] = "addForm.controls['initialValue']"/>
+    </mat-form-field>
+    </p>
+
+  </div>
+
+  <div class="col-md-12"  style="align-content: left;">
+    <span matTooltip="Fill registration form to enable">
+    <button type="submit" mat-raised-button [disabled]="!addForm.valid">
+      <mat-icon color="accent">person</mat-icon>
+      <span>Register</span>
+      
+    </button>
+    </span> 
+  </div>
+
+    </div>
+</form>
+</div>
