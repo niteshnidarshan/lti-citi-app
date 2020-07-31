@@ -7,15 +7,20 @@ import { TransactionModel } from '../model/TransactionModel';
 })
 export class AccountService {
 
-  ACCOUNT_FETCH_URL: string = "http://localhost:8765/lti-citi-app-account/api/account/getAll";
+  ACCOUNT_URL: string = "http://localhost:8765/lti-citi-app-account/api/account";
 
   TRANSACTION_URL: string = "http://localhost:8765/lti-citi-app-transaction/api/transaction/transfer";
 
   constructor(private http: HttpClient) { }
 
   getAccountsOfUser(userId: string){
-    return this.http.get(this.ACCOUNT_FETCH_URL+"/"+userId);
+    return this.http.get(this.ACCOUNT_URL+"/getAll/"+userId);
   }
+
+  deleteAccount(accountId: string){
+    return this.http.delete(this.ACCOUNT_URL+"/delete/"+accountId);
+  }
+
 
   doTransfer(data: TransactionModel){ 
     return this.http.post(this.TRANSACTION_URL, data);

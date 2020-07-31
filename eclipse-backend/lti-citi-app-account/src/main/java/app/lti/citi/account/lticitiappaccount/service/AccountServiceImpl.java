@@ -95,7 +95,7 @@ public class AccountServiceImpl implements AccountService{
 	public List<AccountDetailDto> getAccountByCustomerId(String associatedUserId) {
 		List<AccountDetailDto> dtoList = new LinkedList<AccountDetailDto>();
 		
-		this.repository.findAllByAssociatedUserId(associatedUserId).forEach(
+		this.repository.findAllByAssociatedUserIdAndAccountStatus(associatedUserId, AccountStatus.ACTIVE.toString()).forEach(
 				(account)->{
 					if(account != null) {
 						AccountDetailDto dto = this.convertor.actualToDto(account);

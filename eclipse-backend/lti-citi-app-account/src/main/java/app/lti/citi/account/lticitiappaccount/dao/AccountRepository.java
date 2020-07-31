@@ -10,6 +10,6 @@ import app.lti.citi.account.lticitiappaccount.document.AccountDetail;
 @Repository
 public interface AccountRepository extends MongoRepository<AccountDetail, String>{
 
-	public List<AccountDetail> findAllByAssociatedUserId(String associatedUserId);
+	public List<AccountDetail> findAllByAssociatedUserIdAndAccountStatus(String associatedUserId, String accountStatus);
 	
 }

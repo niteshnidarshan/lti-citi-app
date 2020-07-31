@@ -9,16 +9,27 @@
     <button mat-button routerLink="login" routerLinkActive="active"> 
       <span>Login</span>
     </button>
+  </span> 
+  <span *ngIf="!(authService.isUserLoggedIn())">
+    <button mat-button routerLink="register" routerLinkActive="active"> 
+      <span>Open Account</span>
+    </button>
   </span>
-  <button mat-button routerLink="register" routerLinkActive="active"> 
-    <span>Open Account</span>
-  </button>
+  <span *ngIf="authService.isUserLoggedIn()">
   <button mat-button routerLink="transfer" routerLinkActive="active"> 
-    <span>Transfer</span>
+    <span>Transfer Money</span>
   </button>
-  <button mat-button routerLink="transaction" routerLinkActive="active"> 
-    <span>My Profile</span>
-  </button>
+  </span>
+  <span *ngIf="authService.isUserLoggedIn()">
+    <button mat-button routerLink="transaction" routerLinkActive="active"> 
+      <span>My Profile</span>
+    </button>
+  </span>
+  <span *ngIf="authService.isUserLoggedIn()">
+    <button mat-button routerLink="myTransaction" routerLinkActive="active"> 
+      <span>My Transaction</span>
+    </button>
+  </span>
 </div>
 
 <div class="content-area"> 

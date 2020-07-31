@@ -28,7 +28,7 @@ export class OpenAccountComponent implements OnInit {
     this.registerForm = this.formBuilder.group({
       "firstName": new FormControl('',Validators.required),
       "lastName": new FormControl(), 
-      "email": new FormControl('', [Validators.email, Validators.required]),
+      "email": new FormControl(),
       "password": new FormControl('',[Validators.minLength(3), Validators.required]),
       "mobile": new FormControl('',[Validators.minLength(3), Validators.maxLength(10), Validators.required]),
       "location": new FormControl(),
@@ -126,7 +126,15 @@ export class OpenAccountComponent implements OnInit {
       },//end of success
       (err) => { 
         
-        alert("error in user creation : "+err.error.message);
+        let options = {
+          title: 'Open Account - error',
+          message1: err.error.message,
+          message2: "",
+          cancelText: 'Ok',
+          confirmText: 'Ok'
+        };
+   
+        this.dialogService.open(options);
         
       }
     );

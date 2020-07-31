@@ -60,7 +60,7 @@
             <p>
             <mat-form-field class="text-full-width"  appearance="standard">
               <mat-label>Email</mat-label>
-              <input matInput placeholder="Email" name = "email" [formControl] = "registerForm.controls['email']" required />
+              <input matInput placeholder="Email" name = "email" [formControl] = "registerForm.controls['email']" />
                 
               <mat-error *ngIf="registerForm.controls['email'].hasError('email') && registerForm.controls['email'].dirty">
                   Invalid email.
@@ -97,7 +97,7 @@
             <p>
             <mat-form-field class="text-full-width" appearance="standard">
               <mat-label>Initial Amount</mat-label>
-              <input matInput placeholder="Initial Amount" name = "initialValue" [formControl] = "registerForm.controls['initialValue']"/>
+              <input matInput type="number" placeholder="Initial Amount" name = "initialValue" [formControl] = "registerForm.controls['initialValue']"/>
             </mat-form-field>
             </p>
   

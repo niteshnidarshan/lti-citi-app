@@ -39,6 +39,9 @@ public class TransactionController {
 		}
 		
 		try {
+			//check weather the account is same 
+			if(dto.getSenderAccountId() != null && dto.getSenderAccountId().equals(dto.getReceiversAccountId()))
+				throw new CommonException("Both the account provided same. Change sender/ benificier account#.");
 			
 			//validate sender's account balance
 			Double sendersBalance = this.service.getAmount(dto.getSenderAccountId());

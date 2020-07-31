@@ -35,6 +35,8 @@ import { LogoutComponent } from './components/logout/logout.component';
 import { TransactionComponent } from './components/transaction/transaction.component';
 import { MessageDialogComponent } from './components/dialog/message-dialog/message-dialog.component';
 import { AddAccountComponent } from './components/add-account/add-account.component';
+import { MyTransactionComponent } from './components/my-transaction/my-transaction.component';
+import { ConfirmMessageDialogComponent } from './components/dialog/confirm-message-dialog/confirm-message-dialog.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +47,9 @@ import { AddAccountComponent } from './components/add-account/add-account.compon
     LogoutComponent,
     TransactionComponent,
     MessageDialogComponent,
-    AddAccountComponent
+    AddAccountComponent,
+    MyTransactionComponent,
+    ConfirmMessageDialogComponent
   ],
   imports: [
     BrowserModule,

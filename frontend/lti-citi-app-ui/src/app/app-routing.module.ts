@@ -6,6 +6,7 @@ import { OpenAccountComponent } from './components/open-account/open-account.com
 import { TransferComponent } from './components/transfer/transfer.component';
 import { TransactionComponent } from './components/transaction/transaction.component';
 import { AddAccountComponent } from './components/add-account/add-account.component';
+import { MyTransactionComponent } from './components/my-transaction/my-transaction.component';
 
 
 const routes: Routes = [
@@ -15,6 +16,7 @@ const routes: Routes = [
   {path:"transfer", component:TransferComponent},
   {path:"transaction", component:TransactionComponent},
   {path:"addAccount", component:AddAccountComponent},
+  {path:"myTransaction", component:MyTransactionComponent},
   {path:'', redirectTo:'/login', pathMatch:"full"}
 ];
 

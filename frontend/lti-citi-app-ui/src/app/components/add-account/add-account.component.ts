@@ -39,11 +39,10 @@ export class AddAccountComponent implements OnInit {
      
         this.registerService.createAccount(accountValue).subscribe(
           (success) => {
-            this.account = success;
-            alert(JSON.stringify(this.account));
+            this.account = success; 
             let options = {
               title: 'Add Account',
-              message1: "Account created succfully!",
+              message1: "Account created successfully!",
               message2: "Account# : "+this.account.accountId,
               cancelText: 'Ok',
               confirmText: 'Ok'

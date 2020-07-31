@@ -39,6 +39,9 @@ public class AccountController {
 		if(dto == null)
 			throw new CommonException("Invalid account request to create.");
 		
+		if(dto.getAmount() < 0)
+			throw new CommonException("Invalid amount!");
+		
 		account = this.service.createAccount(dto);
 		
 		if(account == null)

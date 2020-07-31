@@ -1,15 +1,17 @@
 <div class="container">
+  
     <form [formGroup]="transferForm" (ngSubmit)="doTransfer()">
       <div class="row large-box mat-elevation-z3" style="width: 100%;">
         <mat-card class="header"> 
           <mat-card-title>Transfer amount</mat-card-title>  
         </mat-card> 
+        <div class="col-md-12">&nbsp;</div> 
     <div class="col-md-6">
-        <mat-form-field appearance="fill">
+        <mat-form-field class="text-full-width" appearance="fill">
             <mat-label>Select your account</mat-label>
             <mat-select [formControl]="transferForm.controls['senderAccountId']" required>
                 <mat-option>None</mat-option>
-                <mat-option *ngFor="let account of accounts" [value]="account.accountId" >{{account.accountId}}</mat-option>
+                <mat-option *ngFor="let account of accounts" [value]="account.accountId" >{{account.accountId}}<span style="position: absolute; right: 5px;">{{account.amount | currency: 'USD': 'symbol': '1.2-2'}}</span></mat-option>
             </mat-select>
         </mat-form-field>
     </div> 
@@ -18,8 +20,8 @@
     
         <p>
         <mat-form-field class="text-full-width" appearance="standard">
-          <mat-label>Receiver's account #</mat-label>
-          <input matInput placeholder="Receiver's account number"  [formControl] = "transferForm.controls['receiversAccountId']"/>
+          <mat-label>Beneficiary account #</mat-label>
+          <input matInput placeholder="Beneficiar's account number"  [formControl] = "transferForm.controls['receiversAccountId']"/>
         </mat-form-field>
         </p>
     
@@ -31,6 +33,7 @@
     <mat-form-field class="text-full-width" appearance="standard">
       <mat-label>Amount to be transfred</mat-label>
       <input matInput type="number" placeholder="Amount to be transfred" name = "initialValue" [formControl] = "transferForm.controls['amount']"/>
+      <mat-icon matPrefix color="accent">attach_money</mat-icon>
     </mat-form-field>
     </p>
 
