@@ -13,6 +13,8 @@ body {
 
   button{
     outline: none;
+    background-color: orange; 
+    margin-left: 5px;
   }
 
   .lbl{ 

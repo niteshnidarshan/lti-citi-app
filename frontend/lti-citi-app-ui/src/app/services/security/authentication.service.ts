@@ -19,15 +19,14 @@ export class AuthenticationService {
     let loginModel: LoginModel = new LoginModel(mobile, password);
     this.loginService.doLogin(loginModel).subscribe(
       (success) => {
-        this.user = success;  
-      
+        this.user = success;
         sessionStorage.setItem("userId", this.user.userId);
         sessionStorage.setItem("userName", this.user.firstName+" "+this.user.lastName); 
         sessionStorage.setItem("userType", this.user.userType);
         sessionStorage.setItem("token", this.user.token);
  
          
-        this.router.navigate(['/home']);
+        this.router.navigate(['/transaction']);
       },
       (err) => { 
         let options = {
@@ -44,6 +43,7 @@ export class AuthenticationService {
   }
   doLogOut(){
     sessionStorage.clear();
+    this.router.navigate(['/login']);
   }
 
   isUserLoggedIn(): boolean{

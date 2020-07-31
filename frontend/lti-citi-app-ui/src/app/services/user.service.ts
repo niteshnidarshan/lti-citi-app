@@ -7,7 +7,7 @@ import { LoginModel } from '../model/LoginModel';
 })
 export class UserService {
 
-  LOGIN_URL: string = "http://localhost:8766/authenticate";
+  LOGIN_URL: string = "http://localhost:8765/authenticate";
 
   constructor(private http: HttpClient) { }
 
