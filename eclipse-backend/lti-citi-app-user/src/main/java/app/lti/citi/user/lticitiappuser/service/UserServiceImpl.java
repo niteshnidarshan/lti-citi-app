@@ -89,6 +89,7 @@ public class UserServiceImpl implements UserService{
 					user = this.repository.save(user);
 					if(user != null) {
 						dto = this.convertor.actualToDto(user);
+						dto.setSocialSecurityNumber(null);
 					}
 				}
 			}
@@ -107,6 +108,7 @@ public class UserServiceImpl implements UserService{
 			UserDetail user = this.repository.findById(userId).orElse(null);
 			if(user != null) {
 				dto = this.convertor.actualToDto(user);
+				dto.setSocialSecurityNumber(null);
 				List<AccountDetailDto> accounts = this.proxy.getAllAccountByCustomerId(dto.getUserId()).getBody();
 				dto.setAssociatedAccounts(accounts);
 			}				
@@ -139,6 +141,7 @@ public class UserServiceImpl implements UserService{
 				(user)->{
 					if(user != null) {
 						UserDetailDto dto = this.convertor.actualToDto(user);
+						dto.setSocialSecurityNumber(null);
 						userList.add(dto);
 					}
 				}
