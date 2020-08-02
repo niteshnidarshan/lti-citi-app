@@ -7,6 +7,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { ConfirmMessageDialogService } from 'src/app/services/dialog/confirm-message-dialog.service';
 import { AccountService } from 'src/app/services/account.service';
+import { MessageDialogService } from 'src/app/services/dialog/message-dialog.service';
 
 @Component({
   selector: 'app-transaction',
@@ -32,7 +33,7 @@ export class TransactionComponent implements OnInit {
     'operation'
   ];
 
-  constructor(private transactionService: TransactionService, private accountService: AccountService, private router: Router, private confirmMessageDialog: ConfirmMessageDialogService) {
+  constructor(private transactionService: TransactionService, private accountService: AccountService, private router: Router, private confirmMessageDialog: ConfirmMessageDialogService, private messageDialog: MessageDialogService) {
     this.loadUser();
    }
 
@@ -90,29 +91,51 @@ export class TransactionComponent implements OnInit {
   }
 
   deleteAccount(data){ 
-    let options = {
-      title: 'Delete Screen',
-      message1: "Account will be deleted permanently!",
-      message2: "Do you really want to delete account?",
-      cancelText: 'Cancel',
-      confirmText: 'Delete'
-    };
+    if(data.amount > 0){
+      let options = {
+        title: 'Delete Account',
+        message1: "This account is having money [ $"+data.amount+" ].",
+        message2: "Kindly transfer/consume money to delete account.",
+        cancelText: 'Cancel',
+        confirmText: 'Delete'
+      };
+  
+      this.messageDialog.open(options) 
+    }
+    else{
+      let options = {
+        title: 'Delete Account',
+        message1: "Account will be deleted permanently!",
+        message2: "Do you really want to delete account?",
+        cancelText: 'Cancel',
+        confirmText: 'Delete'
+      };
 
-    this.confirmMessageDialog.open(options) 
-    this.confirmMessageDialog.confirmed().subscribe(confirmed => { 
-      if (confirmed) {  
-          // Delete the record & refresh table list
-          this.accountService.deleteAccount(data.accountId).subscribe(
-            (success) => {
-              this.refreshList();
-            },
-            (err) => {
-              alert(err.error.message);
-            }
-          );
-          
-     }
-    }); 
+      this.confirmMessageDialog.open(options) 
+      this.confirmMessageDialog.confirmed().subscribe(confirmed => { 
+        if (confirmed) {  
+            // Delete the record & refresh table list
+            this.accountService.deleteAccount(data.accountId).subscribe(
+              (success) => {
+                //this.refreshList();
+              },
+              (err) => {
+                let options = {
+                  title: 'Delete Account',
+                  message1: err.error.message,
+                  message2: "",
+                  cancelText: 'Cancel',
+                  confirmText: 'Delete'
+                };
+            
+                this.messageDialog.open(options) 
+                this.refreshList();
+              }
+            );
+            
+      }
+      }); 
+    }
   }
 
   refreshList(){

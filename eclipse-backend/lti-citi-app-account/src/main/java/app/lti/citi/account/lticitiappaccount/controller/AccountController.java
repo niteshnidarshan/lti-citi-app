@@ -71,9 +71,9 @@ public class AccountController {
 	}
 	
 	@DeleteMapping("/delete/{accountId}")
-	public ResponseEntity<String> deleteAccount(@PathVariable("accountId") String accountId){
+	public void deleteAccount(@PathVariable("accountId") String accountId){
 		
-		String responseMessage = null;
+		//String responseMessage = null;
 		
 		if(accountId == null)
 			throw new CommonException("Invalid account request to delete.");
@@ -81,13 +81,13 @@ public class AccountController {
 		boolean deleteResponse = this.service.deleteAccount(accountId);
 		
 		if(deleteResponse)
-			responseMessage = "Account deactivated successfully.";
+			throw new CommonException("Account deactivated."); 
 		else
 			throw new CommonException("Account deactivation failed.");
 		
-		ResponseEntity<String> response = new ResponseEntity<String>(responseMessage, HttpStatus.OK);
+		//ResponseEntity<String> response = new ResponseEntity<String>(responseMessage, HttpStatus.OK);
 		
-		return response; 
+		//return response; 
 	}
 	
 	@GetMapping("/get-account/{accountId}")
