@@ -10,6 +10,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -39,6 +40,13 @@ public class JwtAuthenticationController {
 	
 	@Autowired
 	private UserAuthFeignProxy proxy;
+	
+	@GetMapping("/message")
+	public ResponseEntity<String> getMessage(){
+		ResponseEntity<String> response = new ResponseEntity<String>("Api-Gateway warmed up", HttpStatus.OK);
+		
+		return response; 
+	}
 	 
 	@RequestMapping(value = "/authenticate", method = RequestMethod.POST)
 	public ResponseEntity<LoginSuccessDto> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) throws Exception {

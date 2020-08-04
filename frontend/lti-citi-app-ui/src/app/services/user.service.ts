@@ -6,8 +6,10 @@ import { LoginModel } from '../model/LoginModel';
   providedIn: 'root'
 })
 export class UserService {
+  
+  //LOGIN_URL: string = "http://localhost:8765/authenticate";
 
-  LOGIN_URL: string = "http://localhost:8765/authenticate";
+  LOGIN_URL: string = "https://lti-citi-ag.herokuapp.com/authenticate";
 
   constructor(private http: HttpClient) { }
 

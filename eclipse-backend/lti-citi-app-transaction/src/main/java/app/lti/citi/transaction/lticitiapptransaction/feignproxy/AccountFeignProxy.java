@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import app.lti.citi.transaction.lticitiapptransaction.dto.AccountDetailDto;
 
 //@FeignClient(name = "lti-citi-app-account") 
-@FeignClient(name = "lti-citi-app-api-gateway")
+@FeignClient(name = "lti-citi-app-api-gateway", url = "https://lti-citi-ag.herokuapp.com/")
 @RibbonClient(name = "lti-citi-app-account")
 public interface AccountFeignProxy {
 	

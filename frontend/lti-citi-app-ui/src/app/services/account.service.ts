@@ -6,10 +6,12 @@ import { TransactionModel } from '../model/TransactionModel';
   providedIn: 'root'
 })
 export class AccountService {
+  
+  //ACCOUNT_URL: string = "http://localhost:8765/lti-citi-app-account/api/account";
+  ACCOUNT_URL: string = "https://lti-citi-ag.herokuapp.com/lti-citi-app-account/api/account";
 
-  ACCOUNT_URL: string = "http://localhost:8765/lti-citi-app-account/api/account";
-
-  TRANSACTION_URL: string = "http://localhost:8765/lti-citi-app-transaction/api/transaction/transfer";
+  //TRANSACTION_URL: string = "http://localhost:8765/lti-citi-app-transaction/api/transaction/transfer";
+  TRANSACTION_URL: string = "https://lti-citi-ag.herokuapp.com/lti-citi-app-transaction/api/transaction/transfer";
 
   constructor(private http: HttpClient) { }
 

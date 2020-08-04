@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import app.lti.citi.user.lticitiappuser.dto.AccountDetailDto;
  
 
-@FeignClient(name = "lti-citi-app-api-gateway")
+@FeignClient(name = "lti-citi-app-api-gateway", url = "https://lti-citi-ag.herokuapp.com/")
 @RibbonClient(name = "lti-citi-app-account")
 public interface AccountProxy {
 

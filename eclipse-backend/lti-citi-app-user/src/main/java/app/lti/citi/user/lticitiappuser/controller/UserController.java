@@ -32,6 +32,13 @@ public class UserController {
 	@Autowired
 	private UserService service;
 	
+	@GetMapping("/message")
+	public ResponseEntity<String> getMessage(){
+		ResponseEntity<String> response = new ResponseEntity<String>("User warmed up", HttpStatus.OK);
+		
+		return response; 
+	}
+	
 	@PostMapping("/login")
 	public ResponseEntity<UserDetailDto> getUserLogin(@RequestBody LoginDto loginDto){
 		UserDetailDto dto = null;

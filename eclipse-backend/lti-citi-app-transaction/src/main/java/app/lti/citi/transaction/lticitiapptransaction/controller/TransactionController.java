@@ -29,6 +29,12 @@ public class TransactionController {
 	@Autowired
 	private TransactionService service;
 	
+	@GetMapping("/message")
+	public ResponseEntity<String> getMessage(){
+		ResponseEntity<String> response = new ResponseEntity<String>("Transaction warmed up", HttpStatus.OK);
+		
+		return response; 
+	}
 	
 	@PostMapping("/transfer")
 	public ResponseEntity<TransactionDetailDto> transferAmount(@RequestBody TransactionDetailDto dto){

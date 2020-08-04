@@ -7,10 +7,12 @@ import { AccountModel } from 'src/app/model/AccountModel';
   providedIn: 'root'
 })
 export class RegisterService {
+  
+  //USER_REGISTER_URL: string = "http://localhost:8765/register-user";
+  USER_REGISTER_URL: string = "https://lti-citi-ag.herokuapp.com/register-user";
 
-  USER_REGISTER_URL: string = "http://localhost:8765/register-user";
-
-  ACCOUNT_REGISTER_URL: string = "http://localhost:8765/lti-citi-app-account/api/account/create";
+  //ACCOUNT_REGISTER_URL: string = "http://localhost:8765/lti-citi-app-account/api/account/create";
+  ACCOUNT_REGISTER_URL: string = "https://lti-citi-ag.herokuapp.com/lti-citi-app-account/api/account/create";
 
   constructor(private http: HttpClient) { }
 

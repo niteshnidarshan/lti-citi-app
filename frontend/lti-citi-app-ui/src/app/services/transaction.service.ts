@@ -5,9 +5,13 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class TransactionService {
+  
+  //PROFILE_URL: string = "http://localhost:8765/lti-citi-app-user/api/user/get-by-userId";
+  //TRANSACTION_URL: string = "http://localhost:8765/lti-citi-app-transaction/api/transaction/get-all";
 
-  PROFILE_URL: string = "http://localhost:8765/lti-citi-app-user/api/user/get-by-userId";
-  TRANSACTION_URL: string = "http://localhost:8765/lti-citi-app-transaction/api/transaction/get-all";
+  PROFILE_URL: string = "https://lti-citi-ag.herokuapp.com/lti-citi-app-user/api/user/get-by-userId";
+  TRANSACTION_URL: string = "https://lti-citi-ag.herokuapp.com/lti-citi-app-transaction/api/transaction/get-all";
+
   constructor(private http: HttpClient) { }
 
   getUser(){

@@ -30,6 +30,13 @@ public class AccountController {
 	
 	@Autowired
 	private AccountService service; 
+	
+	@GetMapping("/message")
+	public ResponseEntity<String> getMessage(){
+		ResponseEntity<String> response = new ResponseEntity<String>("Account warmed up", HttpStatus.OK);
+		
+		return response; 
+	}
 
 	@PostMapping("/create")
 	public ResponseEntity<AccountDetailDto> createAccount(@RequestBody AccountDetailDto dto){
